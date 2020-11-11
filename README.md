@@ -1,4 +1,4 @@
-# You Only Watch Once (YOWO)
+# You Only Watch Once (YOWO) based End-to-End Architecture for Pedestrian Activity Recognition
 
 PyTorch implementation of the article "[You Only Watch Once: A Unified CNN Architecture for Real-Time Spatiotemporal Action Localization](https://arxiv.org/pdf/1911.06644.pdf)".
 
