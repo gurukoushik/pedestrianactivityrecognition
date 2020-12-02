@@ -12,4 +12,5 @@ $ git clone https://github.com/ykotseruba/JAAD.git
 ```
 $ cp ./pedestrianactivityrecognition/JAAD_to_YOWO/CreateGroundTruthsDatabaseForYOWO.py -d ./JAAD/
 ```
-3. Run CreateGroundTruthsDatabaseForYOWO.py
+3. Run CreateGroundTruthsDatabaseForYOWO.py 
+this command will generate groundthruth for train, test, and validation set in JAAD. 
