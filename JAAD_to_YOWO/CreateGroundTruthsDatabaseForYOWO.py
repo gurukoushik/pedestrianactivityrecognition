@@ -20,7 +20,7 @@ def createFolder(directory):
 
 
 # %%
-def createVideoFilenameDataFrame(videoname_path= "split_ids/all_videos/train.txt")
+def createVideoFilenameDataFrame(videoname_path):
     video_namelist = pd.read_csv(videoname_path,header = None)
     video_namelist.columns = ['vdo_ids']
     return video_namelist
@@ -71,7 +71,7 @@ def CreateGroundtruthsFiles(video_namelist_df):
                 # break
                 if col[-1] == 'b' :
                     appr_id = col
-                else len(df_Transpose['frames'][0]) in frames_length_dict:
+                elif len(df_Transpose['frames'][0]) in frames_length_dict:
                     appr_id = frames_length_dict.pop(len(df_Transpose['frames'][0]))
 
                 for appr_col in [ 'bicycle_motorcycle', 'umbrella', 'phone', 'baby', 'object','stroller_cart']:
@@ -93,7 +93,7 @@ def CreateGroundtruthsFiles(video_namelist_df):
                 # break
                 if col[-1] == 'b' :
                     appr_id = col
-                else len(df_Transpose['frames'][0]) in frames_length_dict:
+                elif len(df_Transpose['frames'][0]) in frames_length_dict:
                     appr_id = frames_length_dict.pop(len(df_Transpose['frames'][0]))
 
                 for appr_col in [ 'bicycle_motorcycle', 'umbrella', 'phone', 'baby', 'object','stroller_cart']:
