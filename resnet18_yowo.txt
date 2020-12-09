@@ -1,0 +1,18 @@
+Epoch: 1
+Classification accuracy: 0.8519488999281071
+Localization Recall: 0.03081130723194654
+Epoch: 2
+Classification accuracy: 0.8754419339803047
+Localization Recall: 0.03710880337106696
+Epoch: 3
+Classification accuracy: 0.8739946359395695
+Localization Recall: 0.041408055542966477
+Epoch: 4
+Classification accuracy: 0.8541754962819511
+Localization Recall: 0.04761472241084958
+Epoch: 5
+Classification accuracy: 0.8564444425412346
+Localization Recall: 0.04541463561865687
+Epoch: 6
+Classification accuracy: 0.8690032839671341
+Localization Recall: 0.046070624799815246
