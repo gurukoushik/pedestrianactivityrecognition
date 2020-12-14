@@ -1,0 +1,6 @@
+base = ../JAAD/fulldata/
+train = datasets/jaad/trainlist.txt
+valid = datasets/jaad/testlist.txt
+names = data/jaad.names
+backup = backup
+gpus  = 0
