@@ -15,15 +15,24 @@ for video in sorted(list_dir)[251:]:
             img = cv2.imread(vdo_path+images)
             prediction = np.loadtxt('./detections_4/images/{}/{}.txt'.format(video,img_num), delimiter = " ")
             groundTruth = np.loadtxt('./datasets/jaad/labels/images/{}/0{}.txt'.format(video,img_num), delimiter = " ")
-            for gt in groundTruth:
+            try:
+                for gt in groundTruth:
+                    gt = gt.astype(int)
+                    x,y,x2,y2, = gt[1],gt[2],gt[3],gt[4]
+                    cv2.rectangle(img,(y,x),(y2,x2),(0,255,0),2)
+            except:
+                gt = groundTruth
                 gt = gt.astype(int)
                 x,y,x2,y2, = gt[1],gt[2],gt[3],gt[4]
-                cv2.rectangle(img,(x,y),(x2,y2),(255,0,),2)
+                cv2.rectangle(img,(y,x),(y2,x2),(0,255,0),2)
+
             for dt in prediction:
-                dt = dt.astype(int)
-                x,y,x2,y2, = dt[2],dt[3],dt[4],dt[5]
-                cv2.rectangle(img,(x,y),(x2,y2),(255,0,),2)
-            
+                if float(dt[1]) >= 0.07:
+#                         print ('plot')
+                    dt = dt.astype(int)
+                    x,y,x2,y2, = dt[2],dt[3],dt[4],dt[5]
+                    cv2.rectangle(img,(x,y),(x2,y2),(255,0,),2))
+
             cv2.imwrite(vdo_path+'predict_'+images, img)   
             print('Done predict ',vdo_path,images)
         except:
