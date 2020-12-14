@@ -138,7 +138,7 @@ def fill_truth_detection(labpath, w, h, flip, dx, dy, sx, sy):
     label = np.reshape(label, (-1))
     return label
 
-def load_data_detection(base_path, imgpath, train, train_dur, shape, dataset_use='ucf101-24', jitter=0.2, hue=0.1, saturation=1.5, exposure=1.5):
+def load_data_detection(base_path, imgpath, train, train_dur, shape, dataset_use='jaad', jitter=0.2, hue=0.1, saturation=1.5, exposure=1.5):
     # clip loading and  data augmentation
     # if dataset_use == 'ucf101-24':
     #     base_path = "/usr/home/sut/datasets/ucf24"
@@ -147,10 +147,10 @@ def load_data_detection(base_path, imgpath, train, train_dur, shape, dataset_use
     im_split = imgpath.split('/')
     num_parts = len(im_split)
     im_ind = int(im_split[num_parts-1][0:5])
-    labpath = os.path.join(base_path, 'labels', im_split[0], im_split[1] ,'{:05d}.txt'.format(im_ind))
+    labpath = os.path.join(base_path, 'labels', im_split[0], im_split[1] ,'{:06d}.txt'.format(im_ind))
 
     img_folder = os.path.join(base_path, 'rgb-images', im_split[0], im_split[1])
-    if dataset_use == 'ucf101-24':
+    if dataset_use == 'jaad':
         max_num = len(os.listdir(img_folder))
     else:
         max_num = len(os.listdir(img_folder)) - 1
@@ -166,13 +166,13 @@ def load_data_detection(base_path, imgpath, train, train_dur, shape, dataset_use
 
     for i in reversed(range(train_dur)):
         # make it as a loop
-        i_temp = im_ind - i * d
-        while i_temp < 1:
-            i_temp = max_num + i_temp
-        while i_temp > max_num:
+        i_temp = im_ind
+        while i_temp < 0:
+            i_temp = max_num - i_temp - 1
+        while i_temp >= max_num:
             i_temp = i_temp - max_num
 
-        if dataset_use == 'ucf101-24':
+        if dataset_use == 'jaad':
             path_tmp = os.path.join(base_path, 'rgb-images', im_split[0], im_split[1] ,'{:05d}.jpg'.format(i_temp))
         else:
             path_tmp = os.path.join(base_path, 'rgb-images', im_split[0], im_split[1] ,'{:05d}.png'.format(i_temp))
@@ -217,7 +217,7 @@ def get_clip(root, imgpath, train_dur, num_samples):
     im_ind = int(im_split[num_parts - 1][0:5])
 
     # for UCF101 dataset
-    base_path = "/usr/home/sut/datasets/ucf24"
+    base_path = "/usr/home/sbpl/datasets/jaad"
     labpath = os.path.join(base_path, 'labels', im_split[6], im_split[7], '{:05d}.txt'.format(im_ind))
     img_folder = os.path.join(base_path, 'rgb-images', im_split[6], im_split[7])
 

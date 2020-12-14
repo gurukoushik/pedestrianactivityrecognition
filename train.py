@@ -23,7 +23,7 @@ from model import YOWO, get_fine_tuning_parameters
 opt = parse_opts()
 # which dataset to use
 dataset_use   = opt.dataset
-assert dataset_use == 'ucf101-24' or dataset_use == 'jhmdb-21', 'invalid dataset'
+assert dataset_use == 'jaad'
 # path for dataset of training and validation
 datacfg       = opt.data_cfg
 # path for cfg file
@@ -237,11 +237,11 @@ def test(epoch):
             for i in range(output.size(0)):
                 boxes = all_boxes[i]
                 boxes = nms(boxes, nms_thresh)
-                if dataset_use == 'ucf101-24':
-                    detection_path = os.path.join('ucf_detections', 'detections_'+str(epoch), frame_idx[i])
-                    current_dir = os.path.join('ucf_detections', 'detections_'+str(epoch))
-                    if not os.path.exists('ucf_detections'):
-                        os.mkdir('ucf_detections')
+                if dataset_use == 'jaad':
+                    detection_path = os.path.join('jaad_detections', 'detections_'+str(epoch), frame_idx[i])
+                    current_dir = os.path.join('jaad_detections', 'detections_'+str(epoch))
+                    if not os.path.exists('jaad_detections'):
+                        os.mkdir('jaad_detections')
                     if not os.path.exists(current_dir):
                         os.mkdir(current_dir)
                 else:
@@ -306,7 +306,13 @@ def test(epoch):
     locolization_recall = 1.0 * total_detected / (total + eps)
 
     print("Classification accuracy: %.3f" % classification_accuracy)
-    print("Locolization recall: %.3f" % locolization_recall)
+    print("Localization recall: %.3f" % locolization_recall)
+
+    f = open("resnet50_yowo.txt","a")
+    f.write("Epoch: {}\n".format(epoch))
+    f.write("Classification accuracy: {}\n".format(classification_accuracy))
+    f.write("Localization Recall: {}\n".format(locolization_recall))
+    f.close()
 
     return fscore
 
